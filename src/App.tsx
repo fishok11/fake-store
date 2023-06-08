@@ -1,8 +1,12 @@
-import './App.css';
+import NavBar from "./components/NavBar";
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './styles/MUITheme'
 
 function App() {
   return (
-    <p>1</p>
+    <ThemeProvider theme={theme}>
+      <NavBar />
+    </ThemeProvider>
   );
 }
 
