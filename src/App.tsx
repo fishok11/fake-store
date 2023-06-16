@@ -1,11 +1,21 @@
-import NavBar from "./components/NavBar";
+import { FC } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import { theme } from './styles/MUITheme'
+import { theme } from './styles/MUITheme';
+import Box from '@mui/material/Box';
+import ProductContainer from "./components/ProductContainer";
+import ProductPage from './components/ProductPage';
 
-function App() {
+const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <NavBar />
+      <Box sx={{ bgcolor: 'background.default' }}>
+        <Routes>
+          <Route index element={<ProductContainer />}/>
+          <Route path={`/product/:productId`} element={<ProductPage />}/>
+          {/* <Route path={`/group/:groupId/user-profile/:userId`} element={<UserProfile />}/> */}
+        </Routes>
+      </Box>
     </ThemeProvider>
   );
 }
