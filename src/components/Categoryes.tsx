@@ -8,10 +8,10 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const Categoryes = () => {
   const [open, setOpen] = useState(true);
+  const [categories, setCategories] = useState<Array<string> | null>(null)
   const handleClick = () => {
     setOpen(!open);
   };
-  const [categories, setCategories] = useState<Array<string> | null>(null)
   useEffect(() => {
     fetch('https://fakestoreapi.com/products/categories')
     .then(res=>res.json())
@@ -31,9 +31,9 @@ const Categoryes = () => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {categories.map((item: string) => (
-            <ListItemButton sx={{ pl: 3 }} key={item}>
-              <ListItemText primary={item} />
+          {categories.map((category: string) => (
+            <ListItemButton sx={{ pl: 3 }} key={category}>
+              <ListItemText primary={category} />
             </ListItemButton>
           ))}
         </List>

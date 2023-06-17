@@ -29,6 +29,7 @@ const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
           component="img"
           height="200"
           image={image}
+          sx={{ padding: '16px' }}
           alt="Paella dish"
         />
         <CardContent> 
