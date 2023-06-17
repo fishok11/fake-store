@@ -2,11 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from './store';
 
 export type FakeStoreState = {
-
+  category: string;
+  fetchCategory: boolean;
 };
 
 const initialState: FakeStoreState = {
-
+  category: '',
+  fetchCategory: false,
 };
 
 // export const incrementAsync = createAsyncThunk(
@@ -21,9 +23,15 @@ const initialState: FakeStoreState = {
 export const fakeStoreSlice = createSlice({
   name: 'fakeStore',
   initialState,
-
   reducers: {
-
+    filterCategory: (state, action: PayloadAction<string>) => {
+      state.category = action.payload;
+      state.fetchCategory = !state.fetchCategory;
+    },
+    clearCategory: (state) => {
+      state.category = '';
+      state.fetchCategory = !state.fetchCategory;
+    },
   },
   // extraReducers: (builder) => {
   //   builder
@@ -39,6 +47,8 @@ export const fakeStoreSlice = createSlice({
   // },
 });
 
-export const {  } = fakeStoreSlice.actions;
+export const { filterCategory, clearCategory } = fakeStoreSlice.actions;
+
+export const fakeStoreState = (state: RootState) => state.fakeStore;
 
 export default fakeStoreSlice.reducer;

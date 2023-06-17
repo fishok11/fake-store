@@ -6,10 +6,10 @@ import { Typography } from "@mui/material";
 
 const NavBar = () => {
   return (
-    <Box sx={{ display: 'flex', gap: '15px', justifyContent: 'space-between' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
       <Typography variant="h3">Fake store</Typography>
       <IconButton aria-label="cart">
-        <Badge badgeContent={0} color="secondary">
+        <Badge badgeContent={1} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
