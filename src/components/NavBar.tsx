@@ -9,7 +9,7 @@ const NavBar = () => {
     <Box sx={{ display: 'flex', gap: '15px', justifyContent: 'space-between' }}>
       <Typography variant="h3">Fake store</Typography>
       <IconButton aria-label="cart">
-        <Badge badgeContent={4} color="secondary">
+        <Badge badgeContent={0} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>

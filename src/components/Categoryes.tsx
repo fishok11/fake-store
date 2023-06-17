@@ -31,6 +31,9 @@ const Categoryes = () => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
+          <ListItemButton sx={{ pl: 3 }}>
+            <ListItemText primary={'All'} />
+          </ListItemButton>
           {categories.map((category: string) => (
             <ListItemButton sx={{ pl: 3 }} key={category}>
               <ListItemText primary={category} />

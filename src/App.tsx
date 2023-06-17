@@ -2,19 +2,20 @@ import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './styles/MUITheme';
-import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import MainPage from "./components/MainPage";
 import ProductPage from './components/ProductPage';
-
+import NavBar from './components/NavBar';
 const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ bgcolor: 'background.default' }}>
+      <Container maxWidth="xl" sx={{ marginTop: '50px', marginBottom: '50px' }}>
+      <NavBar />
         <Routes>
           <Route index element={<MainPage />}/>
           <Route path={`/product/:productId`} element={<ProductPage />}/>
         </Routes>
-      </Box>
+      </Container>
     </ThemeProvider>
   );
 }
