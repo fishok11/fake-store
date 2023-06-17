@@ -7,7 +7,6 @@ export const theme = createTheme({
     },
     secondary: {
       main: '#80cbc4',
-    },
-    mode: 'dark'
+    }
   },
 });

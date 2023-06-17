@@ -4,46 +4,44 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Link, useParams } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { Link } from 'react-router-dom';
 
 type ProductCardProps = {
-  id?: number;
-  title?: string;
-  price?: number;
-  category?: string; 
-  description?: string;
-  image?: string;
-  rating?: {
-    rate?: number;
-    count?: number;
+  id: number;
+  title: string;
+  price: number;
+  category: string; 
+  description: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
   }
 }
 
-const ProductCard: FC<ProductCardProps> = ({id, title, price, category, description, image, rating}) => {
-  const {productId} = useParams();
-
+const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
   return (
-    <Link to={`/product/${productId}`}>
-      <Card sx={{ maxHeight: '294px', height: '100%'}}>
+    <Card variant="outlined">
+      <Link to={`/product/${id}`} className='link'>
         <CardMedia 
           component="img"
-          height="154"
+          height="200"
           image={image}
           alt="Paella dish"
         />
         <CardContent> 
-          <Typography>{price} $</Typography>
-          <Typography variant="body2" gutterBottom>{title}</Typography>
-          {/* <Typography>{category}</Typography> */}
-          {/* <Typography>{description}</Typography> */}
-          {/* <Typography>{rating.rate}</Typography> */}
-          {/* <Typography>{rating.count}</Typography> */}
+          <Typography color="text.secondary">{price} $</Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ textOverflow: 'ellipsis'}}>{title.length >= 30 ? title.slice(0, 30) + '...' : title}</Typography>
         </CardContent>
-        <CardActions>
-
-        </CardActions>
-      </Card>
-    </Link>
+      </Link>
+      <CardActions>
+        <IconButton color="primary" aria-label="add to shopping cart">
+          <AddShoppingCartIcon />
+        </IconButton>
+      </CardActions>
+    </Card>
   )
 };
 
