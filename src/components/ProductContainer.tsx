@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { useEffect, useState } from 'react';
-import Grid from '@mui/material/Unstable_Grid2'; 
 import ProductCard from './ProductCard';
 import { Product, Products } from '../store/types';
 import { useSelector } from 'react-redux';
@@ -15,19 +14,21 @@ const ProductContainer: FC = () => {
       fetch(`https://fakestoreapi.com/products/category/${state.category}`)
       .then(res=>res.json())
       .then((data) => setProducts(data))
+      .catch((error) => console.log(error))
     } else {
       fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => setProducts(data))
+      .catch((error) => console.log(error))
     }
   }, [state.fetchCategory, state.category]);
 
   if (products === null) return null;
 
   return (
-    <Grid container spacing={3} columns={4} sx={{ width: '100%' }}>
+    <div>
       {products.map((item: Product) => (
-        <Grid xs={1}  key={item.id}  maxWidth={311} minWidth={311} sx={{ width: '100%' }}>
+        <div>
           <ProductCard 
             id={item.id}
             title={item.title}
@@ -37,9 +38,9 @@ const ProductContainer: FC = () => {
             image={item.image}
             rating={item.rating}
           />
-        </Grid>
+        </div>
       ))}
-    </Grid>
+    </div>
   )
 };
 
