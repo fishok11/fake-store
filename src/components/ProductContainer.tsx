@@ -1,44 +1,32 @@
 import { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { fakeStoreState, getAllProducts, getSpecificCategory } from '../store/fakeStoreSlice';
+import { Product } from '../store/types';
 import ProductCard from './ProductCard';
-import { Product, Products } from '../store/types';
-import { useSelector } from 'react-redux';
-import { fakeStoreState } from '../store/fakeStoreSlice';
 
 const ProductContainer: FC = () => {
-  const state = useSelector(fakeStoreState)
-  const [products, setProducts] = useState<Products | null>(null);
+  const state = useAppSelector(fakeStoreState);
+  const dispatch = useAppDispatch();
   
   useEffect(() => {
     if (state.category !== '') {
-      fetch(`https://fakestoreapi.com/products/category/${state.category}`)
-      .then(res=>res.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.log(error))
+      dispatch(getSpecificCategory(state.category));
     } else {
-      fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.log(error))
+      dispatch(getAllProducts());
     }
-  }, [state.fetchCategory, state.category]);
-
-  if (products === null) return null;
+  }, [state.fetchCategory, state.category, dispatch]);
 
   return (
     <div>
-      {products.map((item: Product) => (
-        <div>
+      {state.products.map((product: Product) => (
           <ProductCard 
-            id={item.id}
-            title={item.title}
-            price={item.price}
-            category={item.category}
-            description={item.description}
-            image={item.image}
-            rating={item.rating}
+            id={product.id}
+            title={product.title}
+            price={product.price}
+            image={product.image}
+            key={product.id}
           />
-        </div>
       ))}
     </div>
   )

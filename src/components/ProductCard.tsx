@@ -1,18 +1,8 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { Product } from '../store/types';
 
-type ProductCardProps = {
-  id: number;
-  title: string;
-  price: number;
-  category: string; 
-  description: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  }
-}
+type ProductCardProps = Omit<Product, 'description' | 'rating' | 'category'>;
 
 const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
   return (
@@ -23,7 +13,7 @@ const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
         />
         <div> 
           <p>{price} $</p>
-          <p>{title.length >= 30 ? title.slice(0, 30) + '...' : title}</p>
+          <p>{title}</p>
         </div>
       </Link>
     </div>

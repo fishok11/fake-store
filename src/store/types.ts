@@ -9,6 +9,6 @@ export type Product = {
     rate: number;
     count: number;
   }
-}
+};
 
-export type Products = Array<Product>
+export type Products = Product[];
