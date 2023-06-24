@@ -17,7 +17,7 @@ type ProductCardProps = {
 const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
   return (
     <div>
-      <Link to={`/product/${id}`} className='link'>
+      <Link to={`/product/${id}`}>
         <img 
           src={image}
         />
