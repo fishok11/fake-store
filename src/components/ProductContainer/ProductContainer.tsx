@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { fakeStoreState, getAllProducts, getSpecificCategory } from '../store/fakeStoreSlice';
-import { Product } from '../store/types';
-import ProductCard from './ProductCard';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fakeStoreState, getAllProducts, getSpecificCategory } from '../../store/fakeStoreSlice';
+import { Product } from '../../store/types';
+import ProductCard from '../ProductCard/ProductCard';
+import styles from './ProductContainer.module.scss'
 
 const ProductContainer: FC = () => {
   const state = useAppSelector(fakeStoreState);
@@ -18,7 +19,7 @@ const ProductContainer: FC = () => {
   }, [state.fetchCategory, state.category, dispatch]);
 
   return (
-    <div>
+    <div className={styles.container}>
       {state.products.map((product: Product) => (
           <ProductCard 
             id={product.id}

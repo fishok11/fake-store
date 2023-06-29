@@ -80,9 +80,9 @@ export const fakeStoreSlice = createSlice({
       state.category = action.payload;
       state.fetchCategory = !state.fetchCategory;
     },
-    clearCategory: (state) => {
+    clearFilter: (state) => {
       state.category = '';
-      state.fetchCategory = !state.fetchCategory;
+      state.fetchCategory = !state.fetchCategory;  
     },
   },
   extraReducers: (builder) => {
@@ -118,7 +118,7 @@ export const fakeStoreSlice = createSlice({
   },
 });
 
-export const { filterCategory, clearCategory } = fakeStoreSlice.actions;
+export const { filterCategory, clearFilter } = fakeStoreSlice.actions;
 
 export const fakeStoreState = (state: RootState) => state.fakeStore;
 

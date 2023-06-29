@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  @apply block border-r border-gray-300 px-7;
+
+  .button {
+    @apply w-full text-left px-3 py-2 bg-sky-300 rounded-xl text-lg font-semibold mt-10;
+  }
+}
