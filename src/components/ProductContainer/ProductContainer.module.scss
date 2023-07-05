@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .container {
-  @apply grid grid-cols-4 gap-4 min-w-min max-w-6xl mx-auto;
+  @apply grid grid-cols-3 gap-4 min-w-min;
 }

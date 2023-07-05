@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../store/types';
 import styles from './ProductCard.module.scss'
@@ -9,7 +9,9 @@ const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
   return (
     <div className={styles.container}>
       <Link to={`/product/${id}`} className={styles.link}>
-        <img src={image} alt='' className={styles.image}/> 
+        <div className={styles.imageContainer}>
+          <img src={image} alt='' className={styles.image}/> 
+        </div>
         <p className={styles.title}>{title}</p>
       </Link>
       <div className={styles.actionContainer}>
@@ -20,4 +22,4 @@ const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
   )
 };
 
-export default ProductCard;
+export default memo(ProductCard);

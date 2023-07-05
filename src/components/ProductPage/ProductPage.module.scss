@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  @apply max-w-6xl mx-auto pt-7;
+
+  .productContainer {
+    @apply flex gap-12 p-4 bg-stone-200 rounded-xl mb-4;
+
+    .imageContainer {
+      @apply leading-relaxed h-max bg-white rounded-xl w-1/2 p-4 flex justify-center align-middle;
+
+      .image {
+        @apply max-w-xs rounded-xl;
+      }
+    }
+
+    .titleContainer {
+      @apply leading-8;
+
+      .title {
+        @apply text-lg font-semibold;
+      }
+       
+      .rating {
+        @apply text-base font-semibold;
+      }
+    }
+
+    .actionContainer {
+      @apply flex flex-col gap-3 leading-relaxed h-max p-4 mt-4 bg-white rounded-xl w-64;
+
+      .price {
+        @apply text-2xl font-bold text-center;
+      }
+
+      .counterContainer {
+        @apply flex justify-around bg-slate-200 rounded-xl p-3 w-full;
+
+        .counterSimbol {
+          @apply text-lg font-semibold; 
+        }
+      }
+
+      .button {
+        @apply w-full text-center px-3 py-2 bg-slate-400 hover:bg-slate-300 duration-300 rounded-xl text-base font-semibold;
+      }
+    }
+  }
+}

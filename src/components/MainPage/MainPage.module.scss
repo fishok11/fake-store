@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .container {
-  @apply flex w-full pt-7 pb-7;
+  @apply flex w-full pt-7 pb-7 max-w-7xl mx-auto;
 }

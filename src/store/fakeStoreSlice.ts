@@ -33,6 +33,19 @@ export const getAllProducts = createAsyncThunk<Product[], undefined, {rejectValu
   }
 );
 
+export const getProduct = createAsyncThunk<Product, string | undefined, {rejectValue: string}>(
+  'fakeStore/getProduct',
+  async (productId: string | undefined,{rejectWithValue}) => {
+    const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
+
+    if (!response.ok) {
+      return rejectWithValue('Server error!');
+    } 
+
+    return response.json();
+  }
+);
+
 export const getSpecificCategory = createAsyncThunk<Product[], string, {rejectValue: string}>(
   "store/getSpecificCategory",
   async (category: string, {rejectWithValue}) => {
@@ -50,19 +63,6 @@ export const getAllCategories = createAsyncThunk<string[], undefined, {rejectVal
   'fakeStore/getAllCategories',
   async (_,{rejectWithValue}) => {
     const response = await fetch('https://fakestoreapi.com/products/categories');
-
-    if (!response.ok) {
-      return rejectWithValue('Server error!');
-    } 
-
-    return response.json();
-  }
-);
-
-export const getProduct = createAsyncThunk<Product, string | undefined, {rejectValue: string}>(
-  'fakeStore/getProduct',
-  async (productId: string | undefined,{rejectWithValue}) => {
-    const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
 
     if (!response.ok) {
       return rejectWithValue('Server error!');
@@ -94,6 +94,13 @@ export const fakeStoreSlice = createSlice({
         state.products = action.payload;
         state.isLoading = false;
       })
+      .addCase(getProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProduct.fulfilled, (state, action) => {
+        state.product = action.payload;
+        state.isLoading = false;
+      })
       .addCase(getAllCategories.pending, (state) => {
         state.isLoading = true;
       })
@@ -106,13 +113,6 @@ export const fakeStoreSlice = createSlice({
       })
       .addCase(getSpecificCategory.fulfilled, (state, action) => {
         state.products = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(getProduct.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getProduct.fulfilled, (state, action) => {
-        state.product = action.payload;
         state.isLoading = false;
       })
   },
