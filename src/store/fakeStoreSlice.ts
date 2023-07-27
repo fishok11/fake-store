@@ -8,6 +8,7 @@ export type FakeStoreState = {
   categories: string[];
   category: string;
   fetchCategory: boolean;
+  logInPage: boolean;
   isLoading: boolean;
 };
 
@@ -17,10 +18,11 @@ const initialState: FakeStoreState = {
   categories: [],
   category: '',
   fetchCategory: false,
+  logInPage: false,
   isLoading: false,
 };
 
-export const getAllProducts = createAsyncThunk<Product[], undefined, {rejectValue: string}>(
+export const getAllProducts = createAsyncThunk<Products, undefined, {rejectValue: string}>(
   'fakeStore/getAllProducts',
   async (_,{rejectWithValue}) => {
     const response = await fetch('https://fakestoreapi.com/products');
@@ -29,7 +31,9 @@ export const getAllProducts = createAsyncThunk<Product[], undefined, {rejectValu
       return rejectWithValue('Server error!');
     } 
 
-    return response.json();
+    const data = await response.json();
+
+    return data;
   }
 );
 
@@ -42,12 +46,14 @@ export const getProduct = createAsyncThunk<Product, string | undefined, {rejectV
       return rejectWithValue('Server error!');
     } 
 
-    return response.json();
+    const data = await response.json();
+
+    return data;
   }
 );
 
-export const getSpecificCategory = createAsyncThunk<Product[], string, {rejectValue: string}>(
-  "store/getSpecificCategory",
+export const getSpecificCategory = createAsyncThunk<Products, string, {rejectValue: string}>(
+  'store/getSpecificCategory',
   async (category: string, {rejectWithValue}) => {
     const response = await fetch(`https://fakestoreapi.com/products/category/${category}`);
 
@@ -55,7 +61,9 @@ export const getSpecificCategory = createAsyncThunk<Product[], string, {rejectVa
       return rejectWithValue('Server error!');
     } 
     
-    return response.json();
+    const data = await response.json();
+
+    return data;
   }
 );
 
@@ -68,7 +76,9 @@ export const getAllCategories = createAsyncThunk<string[], undefined, {rejectVal
       return rejectWithValue('Server error!');
     } 
 
-    return response.json();
+    const data = await response.json();
+
+    return data;
   }
 );
 
@@ -83,6 +93,12 @@ export const fakeStoreSlice = createSlice({
     clearFilter: (state) => {
       state.category = '';
       state.fetchCategory = !state.fetchCategory;  
+    },
+    showLogInPage: (state) => {
+      state.logInPage = true;
+    },
+    hideLogInPage: (state) => {
+      state.logInPage = true;
     },
   },
   extraReducers: (builder) => {

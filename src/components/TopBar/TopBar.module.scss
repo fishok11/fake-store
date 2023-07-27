@@ -3,5 +3,13 @@
 @tailwind utilities;
 
 .container {
-  @apply border-b border-gray-300;
+  @apply border-b border-gray-300 p-3 mb-7;
+
+  .content {
+    @apply flex justify-between max-w-7xl mx-auto;
+
+    .actionContainer {
+      @apply flex gap-3;
+    }
+  }
 }

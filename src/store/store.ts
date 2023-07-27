@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import fakeStoreReducer from './fakeStoreSlice'
+import fakeStoreReducer from './fakeStoreSlice';
+import userReducer from './userSlice';
 
 export const store = configureStore({
   reducer: {
     fakeStore: fakeStoreReducer,
+    user: userReducer,
   },
 });
 

@@ -9,7 +9,7 @@
     @apply flex gap-12 p-4 bg-stone-200 rounded-xl mb-4;
 
     .imageContainer {
-      @apply leading-relaxed h-max bg-white rounded-xl w-1/2 p-4 flex justify-center align-middle;
+      @apply leading-relaxed bg-white rounded-xl w-1/2 p-4 flex justify-center align-middle;
 
       .image {
         @apply max-w-xs rounded-xl;
