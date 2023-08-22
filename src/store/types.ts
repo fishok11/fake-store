@@ -14,6 +14,7 @@ export type Product = {
 export type Products = Product[];
 
 export type User = {
+  id: number;
   email: string;
   username: string;
   password: string;

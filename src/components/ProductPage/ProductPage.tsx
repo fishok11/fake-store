@@ -7,7 +7,7 @@ import styles from './ProductPage.module.scss';
 
 const ProductPage: FC = () => {
   const {productId} = useParams();
-  const state = useAppSelector(fakeStoreState);
+  const stateStore = useAppSelector(fakeStoreState);
   const dispatch = useAppDispatch();
   const [count, setCount] = useState(1)
   const decrease = () => {
@@ -24,22 +24,22 @@ const ProductPage: FC = () => {
     dispatch(getProduct(productId));
   }, [productId, dispatch])
 
-  if (state.product === null) return null
-  if (state.isLoading === true) return null
+  if (stateStore.product === null) return null
+  if (stateStore.isLoading === true) return null
   
   return (
     <div className={styles.container}>
       <div className={styles.productContainer}>
         <div className={styles.imageContainer}>
-          <img src={state.product.image} alt="" className={styles.image}/>
+          <img src={stateStore.product.image} alt="" className={styles.image}/>
         </div>
         <div>
           <div className={styles.titleContainer}>
-            <p className={styles.title}>{state.product.title}</p>
-            <p className={styles.rating}>{state.product.rating.rate}/{state.product.rating.count}</p>
+            <p className={styles.title}>{stateStore.product.title}</p>
+            <p className={styles.rating}>{stateStore.product.rating.rate}/{stateStore.product.rating.count}</p>
           </div>
           <div className={styles.actionContainer}>
-            <p className={styles.price}>{state.product.price * count} $</p>
+            <p className={styles.price}>{stateStore.product.price * count} $</p>
             <div className={styles.counterContainer}>
               <button className={styles.counterSimbol} onClick={() => decrease()}>-</button>
               <div className={styles.counterSimbol}>{count}</div>
@@ -50,7 +50,7 @@ const ProductPage: FC = () => {
         </div>
       </div>
       {/* <p className={styles.container}>{state.product.category}</p> */}
-      <p className={styles.description}>{state.product.description}</p>
+      <p className={styles.description}>{stateStore.product.description}</p>
     </div>
   );
 }

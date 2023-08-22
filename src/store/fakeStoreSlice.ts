@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from './store';
+import { 
+  RootState, 
+  // AppThunk 
+} from './store';
 import { Product, Products } from './types';
 
 export type FakeStoreState = {
@@ -24,7 +27,7 @@ const initialState: FakeStoreState = {
 
 export const getAllProducts = createAsyncThunk<Products, undefined, {rejectValue: string}>(
   'fakeStore/getAllProducts',
-  async (_,{rejectWithValue}) => {
+  async (_, {rejectWithValue}) => {
     const response = await fetch('https://fakestoreapi.com/products');
 
     if (!response.ok) {
@@ -39,7 +42,7 @@ export const getAllProducts = createAsyncThunk<Products, undefined, {rejectValue
 
 export const getProduct = createAsyncThunk<Product, string | undefined, {rejectValue: string}>(
   'fakeStore/getProduct',
-  async (productId: string | undefined,{rejectWithValue}) => {
+  async (productId: string | undefined, {rejectWithValue}) => {
     const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
 
     if (!response.ok) {
@@ -69,8 +72,8 @@ export const getSpecificCategory = createAsyncThunk<Products, string, {rejectVal
 
 export const getAllCategories = createAsyncThunk<string[], undefined, {rejectValue: string}>(
   'fakeStore/getAllCategories',
-  async (_,{rejectWithValue}) => {
-    const response = await fetch('https://fakestoreapi.com/products/categories');
+  async (_, {rejectWithValue}) => {
+    const response = await fetch('https://fakestoreapi.com/products/categories',);
 
     if (!response.ok) {
       return rejectWithValue('Server error!');
@@ -98,7 +101,7 @@ export const fakeStoreSlice = createSlice({
       state.logInPage = true;
     },
     hideLogInPage: (state) => {
-      state.logInPage = true;
+      state.logInPage = false;
     },
   },
   extraReducers: (builder) => {
@@ -134,7 +137,7 @@ export const fakeStoreSlice = createSlice({
   },
 });
 
-export const { filterCategory, clearFilter } = fakeStoreSlice.actions;
+export const { filterCategory, clearFilter, showLogInPage, hideLogInPage } = fakeStoreSlice.actions;
 
 export const fakeStoreState = (state: RootState) => state.fakeStore;
 

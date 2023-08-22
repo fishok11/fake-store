@@ -18,7 +18,6 @@ root.render(
       </CookiesProvider>
     </Provider>
   </BrowserRouter>
-  
 );
 
 reportWebVitals();

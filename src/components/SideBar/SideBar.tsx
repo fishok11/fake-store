@@ -4,7 +4,7 @@ import { clearFilter, fakeStoreState, filterCategory, getAllCategories } from '.
 import styles from './SideBar.module.scss'
 
 const SideBar = () => {
-  const state = useAppSelector(fakeStoreState);
+  const stateStore = useAppSelector(fakeStoreState);
   const dispatch = useAppDispatch();
   const handleChange = (category: string) => {
     dispatch(filterCategory(category));
@@ -29,7 +29,7 @@ const SideBar = () => {
     <div className={styles.container}>
       <p className={styles.titleCategories}>Categories</p>
       <ul>
-        {state.categories.map((category) => (
+        {stateStore.categories.map((category) => (
           <li key={category}>
             <button onClick={() => handleChange(category)} className={styles.button}>
               {cap(category)}

@@ -7,20 +7,20 @@ import ProductCard from '../ProductCard/ProductCard';
 import styles from './ProductContainer.module.scss'
 
 const ProductContainer: FC = () => {
-  const state = useAppSelector(fakeStoreState);
+  const stateStore = useAppSelector(fakeStoreState);
   const dispatch = useAppDispatch();
   
   useEffect(() => {
-    if (state.category !== '') {
-      dispatch(getSpecificCategory(state.category));
+    if (stateStore.category !== '') {
+      dispatch(getSpecificCategory(stateStore.category));
     } else {
       dispatch(getAllProducts());
     }
-  }, [state.fetchCategory, state.category, dispatch]);
+  }, [stateStore.fetchCategory, stateStore.category, dispatch]);
 
   return (
     <div className={styles.container}>
-      {state.products.map((product: Product) => (
+      {stateStore.products.map((product: Product) => (
           <ProductCard 
             id={product.id}
             title={product.title}

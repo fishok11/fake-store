@@ -1,17 +1,25 @@
 import { FC } from 'react';
 import styles from './TopBar.module.scss'
-import { Link } from 'react-router-dom';
+import { showLogInPage } from '../../store/fakeStoreSlice';
+import { useAppDispatch } from '../../store/hooks';
+import { useCookies } from 'react-cookie';
 
 const TopBar: FC = () => {
+  const dispatch = useAppDispatch();
+  const [cookies] = useCookies(['user']);
+
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
+      <div className={styles.items}>
         <p>Fake store</p>
         <div className={styles.actionContainer}>
-          <p>Profile</p>
-          <p>Cart</p>
-          <Link to={'/singUp'}>Sing up</Link>
-          <Link to={'/logIn'}>Log in</Link>
+          {cookies.user !== undefined && (
+            <>
+              <button onClick={() => (console.log(cookies.user))}>Profile</button>
+              <button>Cart</button>
+            </>
+          )}
+          {cookies.user === undefined && (<button onClick={() => (dispatch(showLogInPage()))}>Log in</button>)}
         </div>
       </div>
     </div>
