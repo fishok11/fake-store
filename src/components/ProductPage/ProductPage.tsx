@@ -48,9 +48,9 @@ const ProductPage: FC = () => {
             <button className={styles.button}>Add to cart</button>
           </div>
         </div>
+        <p className={styles.description}>{stateStore.product.description}</p>
       </div>
       {/* <p className={styles.container}>{state.product.category}</p> */}
-      <p className={styles.description}>{stateStore.product.description}</p>
     </div>
   );
 }
