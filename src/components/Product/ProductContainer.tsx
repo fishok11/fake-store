@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fakeStoreState, getAllProducts, getSpecificCategory } from '../../store/fakeStoreSlice';
 import { Product } from '../../store/types';
-import ProductCard from '../ProductCard/ProductCard';
+import ProductCard from './ProductCard';
 import styles from './ProductContainer.module.scss'
 
 const ProductContainer: FC = () => {

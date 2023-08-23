@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .container {
-  @apply flex flex-col justify-between max-w-xs bg-stone-200 border border-gray-200 rounded-xl p-4;
+  @apply flex flex-col justify-between max-w-xs bg-stone-200 rounded-xl p-4;
 
   .link {
     @apply flex flex-col;

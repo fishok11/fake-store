@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from './store';
 import { Cart, CartItem } from './types';
+import toast from 'react-hot-toast';
 
 export type CartState = {
-
+  isLoading: boolean;
 };
 
 const initialState: CartState = {
-
+  isLoading: false,
 };
 
 export const addProductToCart = createAsyncThunk<Cart, CartItem, {rejectValue: string}>(
@@ -20,10 +21,14 @@ export const addProductToCart = createAsyncThunk<Cart, CartItem, {rejectValue: s
       },
       body: JSON.stringify(cartItem)
     });
+    
+    toast.success('Product edded to cart!');
 
     if (!response.ok) {
+      toast.error('Error!');
       return rejectWithValue('Server error!');
     } 
+
 
     const data = await response.json();
 
@@ -42,10 +47,10 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addCase(addProductToCart.pending, (state) => {
-
+      state.isLoading = true;
     })
     .addCase(addProductToCart.fulfilled, (state, action) => {
-
+      state.isLoading = false;
     })
   },
 });

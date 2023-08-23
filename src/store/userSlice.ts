@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from './store';
 import { User } from './types';
+import toast from 'react-hot-toast';
 
 export type UserState = {
   token: string;
@@ -26,7 +27,10 @@ export const logIn = createAsyncThunk<string, User, {rejectValue: string}>(
       })
     });
 
+    toast.success('Success!');
+
     if (!response.ok) {
+      toast.error('Error!');
       return rejectWithValue('Server error!');
     } 
 

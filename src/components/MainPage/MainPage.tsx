@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import SideBar from '../SideBar/SideBar';
-import ProductContainer from '../ProductContainer/ProductContainer';
+import ProductContainer from '../Product/ProductContainer';
 import styles from './MainPage.module.scss'
 
 const MainPage: FC = () => {

@@ -4,6 +4,7 @@ import {
   // AppThunk 
 } from './store';
 import { Product, Products } from './types';
+import toast from 'react-hot-toast';
 
 export type FakeStoreState = {
   products: Products;
@@ -31,6 +32,7 @@ export const getAllProducts = createAsyncThunk<Products, undefined, {rejectValue
     const response = await fetch('https://fakestoreapi.com/products');
 
     if (!response.ok) {
+      toast.error('Error!');
       return rejectWithValue('Server error!');
     } 
 
@@ -46,6 +48,7 @@ export const getProduct = createAsyncThunk<Product, string | undefined, {rejectV
     const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
 
     if (!response.ok) {
+      toast.error('Error!');
       return rejectWithValue('Server error!');
     } 
 
@@ -61,6 +64,7 @@ export const getSpecificCategory = createAsyncThunk<Products, string, {rejectVal
     const response = await fetch(`https://fakestoreapi.com/products/category/${category}`);
 
     if (!response.ok) {
+      toast.error('Error!');
       return rejectWithValue('Server error!');
     } 
     
@@ -76,6 +80,7 @@ export const getAllCategories = createAsyncThunk<string[], undefined, {rejectVal
     const response = await fetch('https://fakestoreapi.com/products/categories',);
 
     if (!response.ok) {
+      toast.error('Error!');
       return rejectWithValue('Server error!');
     } 
 

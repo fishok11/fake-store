@@ -12,7 +12,7 @@ const TopBar: FC = () => {
   const [cookies] = useCookies(['user']);
 
   return (
-    <div className={styles.container}>
+    <header className={styles.container}>
       <div className={styles.items}>
         <div className={styles.serch}>
           <input className={styles.input} placeholder={'Serch...'}/>
@@ -22,14 +22,14 @@ const TopBar: FC = () => {
         <div className={styles.actionContainer}>
           {cookies.user !== undefined && (
             <>
-              <button className={styles.ico} onClick={() => (console.log(cookies.user))}><FontAwesomeIcon icon={faUser} /></button>
+              <button className={styles.ico}><FontAwesomeIcon icon={faUser} /></button>
               <Link className={styles.ico} to={`/cart`}><FontAwesomeIcon icon={faCartShopping} /></Link>
             </>
           )}
           {cookies.user === undefined && (<button onClick={() => (dispatch(showLogInPage()))}>Log in</button>)}
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 

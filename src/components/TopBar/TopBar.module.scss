@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .container {
-  @apply  p-3 mb-7;
+  @apply p-3 mb-7;
 
   .items {
     @apply flex justify-between max-w-7xl mx-auto;
@@ -12,11 +12,11 @@
       @apply flex;
 
       .input {
-        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-xl outline-none block w-full p-2.5 box-border;
+        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-xl outline-none block w-full p-1.5 box-border;
       }
   
       .button {
-        @apply block bg-slate-400 hover:bg-slate-300 duration-300 font-medium rounded-r-xl text-base px-5 py-2.5 text-center box-border;
+        @apply block bg-slate-400 hover:bg-slate-300 duration-300 font-medium rounded-r-xl text-base px-5 py-1.5 text-center box-border;
       }
     }
 
