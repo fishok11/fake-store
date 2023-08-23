@@ -34,3 +34,21 @@ export type User = {
   };
   phone: string;
 }
+
+export type ProductsToCart = {
+  productId: number;
+  quantity: number;
+}
+
+export type CartItem = {
+  userId: number;
+  date: Date;
+  products: ProductsToCart[];
+};
+
+export type Cart = {
+  id: number;
+  userId: number;
+  date: Date;
+  products: ProductsToCart[];
+};

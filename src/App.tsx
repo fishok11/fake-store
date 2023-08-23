@@ -6,6 +6,7 @@ import TopBar from './components/TopBar/TopBar';
 import LogIn from './components/LogIn/LogIn';
 import { useAppSelector } from './store/hooks';
 import { fakeStoreState } from './store/fakeStoreSlice';
+import Cart from './components/Cart/Cart';
 
 const App: FC = () => {
   const stateStore = useAppSelector(fakeStoreState);
@@ -17,6 +18,7 @@ const App: FC = () => {
       <Routes>
         <Route index element={<MainPage />}/>
         <Route path={`/product/:productId`} element={<ProductPage />}/>
+        <Route path={`/cart`} element={<Cart />}/>
       </Routes>
     </div>
   );

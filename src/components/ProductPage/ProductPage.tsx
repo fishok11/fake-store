@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fakeStoreState, getProduct } from '../../store/fakeStoreSlice';
 import styles from './ProductPage.module.scss';
+import { useCookies } from "react-cookie";
+import { CartItem } from "../../store/types";
+import { addProductToCart } from "../../store/cartSlice";
 
 const ProductPage: FC = () => {
   const {productId} = useParams();
@@ -19,10 +22,20 @@ const ProductPage: FC = () => {
     setCount(count => count + 1);
   };
 
-
   useEffect(() => {
     dispatch(getProduct(productId));
-  }, [productId, dispatch])
+  }, [productId, dispatch]);
+
+  const [cookies] = useCookies(['user']);
+  const date = new Date();
+
+  if (productId === undefined) return null
+  
+  const cartItem: CartItem = {
+    userId: cookies.user.id,
+    date: date,
+    products: [{productId: +productId, quantity: count}],
+  }
 
   if (stateStore.product === null) return null
   if (stateStore.isLoading === true) return null
@@ -45,7 +58,7 @@ const ProductPage: FC = () => {
               <div className={styles.counterSimbol}>{count}</div>
               <button className={styles.counterSimbol} onClick={() => increase()}>+</button>
             </div>
-            <button className={styles.button}>Add to cart</button>
+            <button className={styles.button} onClick={() => dispatch(addProductToCart(cartItem))}>Add to cart</button>
           </div>
         </div>
         <p className={styles.description}>{stateStore.product.description}</p>

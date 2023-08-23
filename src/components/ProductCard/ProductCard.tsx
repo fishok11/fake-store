@@ -1,11 +1,23 @@
 import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { Product } from '../../store/types';
+import { CartItem, Product } from '../../store/types';
 import styles from './ProductCard.module.scss'
+import { useCookies } from 'react-cookie';
+import { useAppDispatch } from '../../store/hooks';
+import { addProductToCart } from '../../store/cartSlice';
 
 type ProductCardProps = Omit<Product, 'description' | 'rating' | 'category'>;
 
 const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
+  const dispatch = useAppDispatch()
+  const [cookies] = useCookies(['user'])
+  const date = new Date()
+  const cartItem: CartItem = {
+    userId: cookies.user?.id,
+    date: date,
+    products: [{productId: id, quantity: 1}]
+  }
+
   return (
     <div className={styles.container}>
       <Link to={`/product/${id}`} className={styles.link}>
@@ -16,7 +28,7 @@ const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
       </Link>
       <div className={styles.actionContainer}>
         <p className={styles.price}>$ {price}</p>
-        <button className={styles.button}>Add to cart</button>
+        <button className={styles.button} onClick={() => dispatch(addProductToCart(cartItem))}>Add to cart</button>
       </div>
     </div>
   )

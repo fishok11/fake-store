@@ -1,10 +1,20 @@
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { FC } from 'react';
+import { useAppDispatch } from '../../store/hooks';
+import { AppThunk } from '../../store/store';
+import styles from './Button.module.scss';
 
-const Button = () => {
+type ButtonProps = {
+  text: string;
+  action: AppThunk;
+}
+
+const Button: FC<ButtonProps> = ({text, action}) => {
   const dispatch = useAppDispatch();
 
   return (
-    null
+    <>
+      <button className={styles.button} onClick={() => dispatch(action)}>{text}</button>
+    </>
   )
 }
 

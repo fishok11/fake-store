@@ -1,10 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useCookies } from 'react-cookie';
 import { User } from '../../store/types';
 import { hideLogInPage } from '../../store/fakeStoreSlice';
 import { logIn, userState } from '../../store/userSlice';
 import styles from './LogIn.module.scss';
-import { useCookies } from 'react-cookie';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const LogIn = () => {
   const dispatch = useAppDispatch();
@@ -41,16 +43,11 @@ const LogIn = () => {
   return (
     <div className={styles.container}>
       <div className={styles.item}>
-        <div className={styles.close} onClick={() => dispatch(hideLogInPage())}>x</div>
-        <div>
-          <p>Username:</p>
-          <input type="text" className={styles.input} value={username} onChange={(e) => setUsername(e.target.value)} />
-        </div>
-        <div>
-          <p>Password:</p>
-          <input type="password" className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button className={styles.button} onClick={() => handleChange(user)}>Log in</button>
+        <div className={styles.close} onClick={() => dispatch(hideLogInPage())}><FontAwesomeIcon icon={faXmark} /></div>
+        <p className={styles.title}>Log in</p>
+        <input type="text" className={styles.input} value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="password" className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button className={styles.button} onClick={() => handleChange(user)}>OK</button>
         {error && (<p className={styles.error}>Fill in all the fields!</p>)}
       </div>
     </div>
