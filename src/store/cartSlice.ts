@@ -1,7 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from './store';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from './store';
 import { Cart, CartItem } from './types';
 import toast from 'react-hot-toast';
+import { showLogInPage } from './fakeStoreSlice';
 
 export type CartState = {
   isLoading: boolean;
@@ -13,28 +14,32 @@ const initialState: CartState = {
 
 export const addProductToCart = createAsyncThunk<Cart, CartItem, {rejectValue: string}>(
   'fakeStore/addProductToCart',
-  async (cartItem: CartItem, {rejectWithValue}) => {
-    const response = await fetch('https://fakestoreapi.com/carts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(cartItem)
-    });
-    
-    toast.success('Product edded to cart!');
+  async (cartItem: CartItem, {rejectWithValue, dispatch}) => {
 
-    if (!response.ok) {
-      toast.error('Error!');
-      return rejectWithValue('Server error!');
-    } 
+    if (cartItem.userId !== undefined) {
+      const response = await fetch('https://fakestoreapi.com/carts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cartItem)
+      });
+      
+      toast.success('Product edded to cart!');
 
+      if (!response.ok) {
+        toast.error('Error!');
+        return rejectWithValue('Server error!');
+      } 
 
-    const data = await response.json();
+      const data = await response.json();
 
-    console.log(data);
-    
-    return data;
+      console.log(data);
+      
+      return data;
+    } else {
+      dispatch(showLogInPage());
+    }
   }
 );
 

@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from './store';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from './store';
 import { User } from './types';
 import toast from 'react-hot-toast';
 

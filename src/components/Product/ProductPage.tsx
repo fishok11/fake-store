@@ -32,7 +32,7 @@ const ProductPage: FC = () => {
   if (productId === undefined) return null
   
   const cartItem: CartItem = {
-    userId: cookies.user.id,
+    userId: cookies.user?.id,
     date: date,
     products: [{productId: +productId, quantity: count}],
   }
