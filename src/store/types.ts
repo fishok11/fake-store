@@ -35,20 +35,22 @@ export type User = {
   phone: string;
 }
 
-export type ProductsToCart = {
+export type ProductsInCart = {
   productId: number;
   quantity: number;
 }
 
-export type CartItem = {
+export type CartItemToAdded = {
   userId: number;
   date: Date;
-  products: ProductsToCart[];
+  products: ProductsInCart[];
 };
 
-export type Cart = {
+export type CartItem = {
   id: number;
   userId: number;
   date: Date;
-  products: ProductsToCart[];
-};
+  products: ProductsInCart[];
+}; 
+
+export type Cart = CartItem[];

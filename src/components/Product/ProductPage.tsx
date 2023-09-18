@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fakeStoreState, getProduct } from '../../store/fakeStoreSlice';
 import styles from './ProductPage.module.scss';
 import { useCookies } from "react-cookie";
-import { CartItem } from "../../store/types";
+import { CartItemToAdded } from "../../store/types";
 import { addProductToCart } from "../../store/cartSlice";
 
 const ProductPage: FC = () => {
@@ -31,7 +31,7 @@ const ProductPage: FC = () => {
 
   if (productId === undefined) return null
   
-  const cartItem: CartItem = {
+  const cartItem: CartItemToAdded = {
     userId: cookies.user?.id,
     date: date,
     products: [{productId: +productId, quantity: count}],

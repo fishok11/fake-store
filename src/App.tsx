@@ -13,14 +13,6 @@ import { userState } from './store/userSlice';
 
 const App: FC = () => {
   const stateStore = useAppSelector(fakeStoreState);
-  const stateCart = useAppSelector(cartState);
-  const stateUser = useAppSelector(userState);
-
-  // if (stateStore.isLoading === true || stateCart.isLoading === true || stateUser.isLoading === true) {
-  //   toast.loading('Waiting...', {
-  //     duration: 1000,
-  //   });
-  // }
 
   return (
     <div>

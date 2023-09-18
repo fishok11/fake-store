@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { CartItem, Product } from '../../store/types';
+import { CartItemToAdded, Product } from '../../store/types';
 import styles from './ProductCard.module.scss'
 import { useCookies } from 'react-cookie';
 import { useAppDispatch } from '../../store/hooks';
@@ -12,7 +12,7 @@ const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
   const dispatch = useAppDispatch()
   const [cookies] = useCookies(['user'])
   const date = new Date()
-  const cartItem: CartItem = {
+  const cartItem: CartItemToAdded = {
     userId: cookies.user?.id,
     date: date,
     products: [{productId: id, quantity: 1}]
