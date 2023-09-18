@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { 
-  RootState, 
-  // AppThunk 
-} from './store';
+import { RootState } from './store';
+import axios from 'axios';
 import { Product, Products } from './types';
 import toast from 'react-hot-toast';
 
@@ -29,64 +27,56 @@ const initialState: FakeStoreState = {
 export const getAllProducts = createAsyncThunk<Products, undefined, {rejectValue: string}>(
   'fakeStore/getAllProducts',
   async (_, {rejectWithValue}) => {
-    const response = await fetch('https://fakestoreapi.com/products');
-
-    if (!response.ok) {
+    try {
+      const { data } = await axios.get('https://fakestoreapi.com/products');
+      return data;
+    } catch (error) {
+      console.log(error);
       toast.error('Error!');
       return rejectWithValue('Server error!');
-    } 
-
-    const data = await response.json();
-
-    return data;
+    }
   }
 );
 
 export const getProduct = createAsyncThunk<Product, string | undefined, {rejectValue: string}>(
   'fakeStore/getProduct',
   async (productId: string | undefined, {rejectWithValue}) => {
-    const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
-
-    if (!response.ok) {
+    try {
+      const { data } = await axios.get(`https://fakestoreapi.com/products/${productId}`);
+      return data;
+    } catch (error) {
+      console.log(error);
       toast.error('Error!');
       return rejectWithValue('Server error!');
-    } 
-
-    const data = await response.json();
-
-    return data;
+    }
   }
 );
 
 export const getSpecificCategory = createAsyncThunk<Products, string, {rejectValue: string}>(
   'store/getSpecificCategory',
   async (category: string, {rejectWithValue}) => {
-    const response = await fetch(`https://fakestoreapi.com/products/category/${category}`);
-
-    if (!response.ok) {
+    try {
+      const { data } = await axios.get(`https://fakestoreapi.com/products/category/${category}`);
+      return data;
+    } catch (error) {
+      console.log(error);
       toast.error('Error!');
       return rejectWithValue('Server error!');
-    } 
-    
-    const data = await response.json();
-
-    return data;
+    }
   }
 );
 
 export const getAllCategories = createAsyncThunk<string[], undefined, {rejectValue: string}>(
   'fakeStore/getAllCategories',
   async (_, {rejectWithValue}) => {
-    const response = await fetch('https://fakestoreapi.com/products/categories',);
-
-    if (!response.ok) {
+    try {
+      const { data } = await axios.get('https://fakestoreapi.com/products/categories',);
+      return data;
+    } catch (error) {
+      console.log(error);
       toast.error('Error!');
       return rejectWithValue('Server error!');
-    } 
-
-    const data = await response.json();
-
-    return data;
+    }
   }
 );
 

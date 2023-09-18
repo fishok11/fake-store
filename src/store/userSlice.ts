@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
+import axios from 'axios';
 import { User } from './types';
 import toast from 'react-hot-toast';
 
@@ -16,27 +17,18 @@ const initialState: UserState = {
 export const logIn = createAsyncThunk<string, User, {rejectValue: string}>(
   'fakeStore/logIn',
   async (user: User, {rejectWithValue}) => {
-    const response = await fetch('https://fakestoreapi.com/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    try {
+      const { data } = await axios.post('https://fakestoreapi.com/auth/login', {
         username: user.username,
         password: user.password,
-      })
-    });
-
-    toast.success('Success!');
-
-    if (!response.ok) {
+      });
+      toast.success('Success!');
+      return data;
+    } catch (error) {
+      console.log(error);
       toast.error('Error!');
       return rejectWithValue('Server error!');
-    } 
-
-    const data = await response.json();
-
-    return data;
+    }
   }
 );
 
