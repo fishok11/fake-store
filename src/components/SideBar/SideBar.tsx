@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { clearFilter, fakeStoreState, filterCategory, getAllCategories } from '../../store/fakeStoreSlice';
+import { clearFilter, fakeStoreState, filterCategory, getAllCategoriesNames } from '../../store/fakeStoreSlice';
 import styles from './SideBar.module.scss'
 
 const SideBar = () => {
@@ -22,7 +22,7 @@ const SideBar = () => {
   }
 
   useEffect(() => {
-    dispatch(getAllCategories());
+    dispatch(getAllCategoriesNames());
   }, [dispatch]);
 
   return (

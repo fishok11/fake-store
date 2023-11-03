@@ -6,7 +6,7 @@
   @apply max-w-7xl mx-auto pt-7;
 
   .productContainer {
-    @apply flex gap-12 p-4 bg-stone-200 rounded-xl mb-4;
+    @apply flex gap-12 p-4 bg-white rounded-xl mb-4 shadow-xl;
 
     .imageContainer {
       @apply leading-relaxed bg-white rounded-xl w-2/3 p-4 flex justify-center align-middle;
@@ -44,7 +44,7 @@
       }
 
       .button {
-        @apply w-full text-center px-3 py-2 bg-slate-400 hover:bg-slate-300 duration-300 rounded-xl text-base font-semibold;
+        @apply w-full text-center px-3 py-2 bg-slate-400 hover:shadow-xl duration-300 rounded-xl text-base font-semibold;
       }
     }
   }

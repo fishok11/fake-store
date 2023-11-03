@@ -66,8 +66,8 @@ export const getSpecificCategory = createAsyncThunk<Products, string, {rejectVal
   }
 );
 
-export const getAllCategories = createAsyncThunk<string[], undefined, {rejectValue: string}>(
-  'fakeStore/getAllCategories',
+export const getAllCategoriesNames = createAsyncThunk<string[], undefined, {rejectValue: string}>(
+  'fakeStore/getAllCategoriesNames',
   async (_, {rejectWithValue}) => {
     try {
       const { data } = await axios.get('https://fakestoreapi.com/products/categories',);
@@ -115,10 +115,10 @@ export const fakeStoreSlice = createSlice({
         state.product = action.payload;
         state.isLoading = false;
       })
-      .addCase(getAllCategories.pending, (state) => {
+      .addCase(getAllCategoriesNames.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAllCategories.fulfilled, (state, action) => {
+      .addCase(getAllCategoriesNames.fulfilled, (state, action) => {
         state.categories = action.payload;
         state.isLoading = false;
       })

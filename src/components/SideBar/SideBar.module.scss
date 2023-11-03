@@ -10,10 +10,10 @@
     @apply text-xl font-bold inline-block py-2;
   }
   .button {
-    @apply w-full text-left px-3 py-2 hover:bg-gray-200 duration-300 rounded-xl text-lg font-semibold focus:bg-gray-200 text-inherit; 
+    @apply w-full text-left px-3 py-2 hover:shadow-xl duration-300 rounded-xl text-lg font-semibold focus:shadow-xl text-inherit; 
   }
 
   .clearButton {
-    @apply w-full text-center px-3 py-2 bg-slate-400 hover:bg-slate-300 duration-300 rounded-xl text-lg font-semibold mt-10 text-inherit;
+    @apply w-full text-center px-3 py-2 bg-slate-400 hover:shadow-xl duration-300 rounded-xl text-lg font-semibold mt-10 text-inherit;
   }
 }
