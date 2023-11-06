@@ -2,26 +2,24 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import axios from 'axios';
 import { DEFAULT_URL } from '../utils';
-import { User, UserLogIn, UserSignUp } from './types';
+import { User, UserSignUp } from './types';
 import toast from 'react-hot-toast';
 
 export type UserState = {
+  users: User[],
   isLoading: boolean;
 };
 
 const initialState: UserState = {
+  users: [],
   isLoading: false,
 };
 
-export const logIn = createAsyncThunk<string, UserLogIn, {rejectValue: string}>(
-  'fakeStore/logIn',
-  async (user: UserLogIn, {rejectWithValue}) => {
+export const usersForLogIn = createAsyncThunk<User[], undefined, {rejectValue: string}>(
+  'user/usersForLogIn',
+  async (_, {rejectWithValue}) => {
     try {
-      const { data } = await axios.post(DEFAULT_URL + 'users', {
-        username: user.username,
-        password: user.password,
-      });
-      toast.success('Success!');
+      const { data } = await axios.get(DEFAULT_URL + 'users');
       return data;
     } catch (error) {
       console.log(error);
@@ -32,7 +30,7 @@ export const logIn = createAsyncThunk<string, UserLogIn, {rejectValue: string}>(
 );
 
 export const signUp = createAsyncThunk<User, UserSignUp, {rejectValue: string}>(
-  'fakeStore/signUp',
+  'user/signUp',
   async (user: UserSignUp, {rejectWithValue}) => {
     try {
       const { data } = await axios.post<User>(DEFAULT_URL + 'users', {...user});
@@ -54,10 +52,11 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(logIn.pending, (state) => {
+    .addCase(usersForLogIn.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(logIn.fulfilled, (state) => {
+    .addCase(usersForLogIn.fulfilled, (state, action) => {
+      state.users = action.payload
       state.isLoading = false;
     })
     .addCase(signUp.pending, (state) => {

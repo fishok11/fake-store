@@ -22,7 +22,7 @@ const TopBar: FC = () => {
         <div className={styles.actionContainer}>
           {cookies.user !== undefined && (
             <>
-              <Link className={styles.ico} to={`/cart`}><FontAwesomeIcon icon={faUser} /></Link>
+              <Link className={styles.ico} to={`/userProfile`}><FontAwesomeIcon icon={faUser} /></Link>
               <Link className={styles.ico} to={`/cart`}><FontAwesomeIcon icon={faCartShopping} /></Link>
             </>
           )}

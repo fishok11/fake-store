@@ -17,7 +17,7 @@ const initialState: CartState = {
 };
 
 export const addProductToCart = createAsyncThunk<CartItem, CartItemToAdded, {rejectValue: string}>(
-  'fakeStore/addProductToCart',
+  'cart/addProductToCart',
   async (cartItem: CartItemToAdded, {rejectWithValue, dispatch}) => {
     if (cartItem.userId !== undefined) {
       try {
@@ -36,7 +36,7 @@ export const addProductToCart = createAsyncThunk<CartItem, CartItemToAdded, {rej
 );
 
 export const getCart = createAsyncThunk<CartItem[], undefined, {rejectValue: string}>(
-  'getCart/addProductToCart',
+  'cart/getCart',
   async (_, {rejectWithValue}) => {
     try {
       const { data } = await axios.get('https://fakestoreapi.com/carts/user/1')
@@ -68,7 +68,7 @@ export const userSlice = createSlice({
       state.isLoading = true;
     })
     .addCase(getCart.fulfilled, (state, action) => {
-      const i = action.payload
+      // const i = action.payload
       // state.products = ;
       state.isLoading = false;
     })

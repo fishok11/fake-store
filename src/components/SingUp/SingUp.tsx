@@ -1,17 +1,16 @@
 import { FC } from 'react';
-import { useState, useMemo, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useState, useMemo } from 'react';
+import { useAppDispatch } from '../../store/hooks';
 import { useCookies } from 'react-cookie';
 import { UserSignUp } from '../../store/types';
 import { hideSignUpPage } from '../../store/fakeStoreSlice';
-import { signUp, userState } from '../../store/userSlice';
+import { signUp } from '../../store/userSlice';
 import styles from './SingUp.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const SignUp: FC = () => {
   const dispatch = useAppDispatch();
-  const stateUser = useAppSelector(userState);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -29,7 +28,7 @@ const SignUp: FC = () => {
       setError(false);
       const resultAction = await dispatch(signUp(user));
       const userData = resultAction.payload;
-      if (resultAction.type === 'fakeStore/signUp/fulfilled') {
+      if (resultAction.type === 'user/signUp/fulfilled') {
         dispatch(hideSignUpPage());
         if (cookies.user === undefined) {
           setCookie('user', userData, { expires: cookiesLifetime })

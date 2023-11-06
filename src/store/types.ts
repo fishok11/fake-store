@@ -28,11 +28,6 @@ export type UserSignUp = {
   password: string;
 }
 
-export type UserLogIn = {
-  username: string;
-  password: string;
-}
-
 //=======================================================================
 
 export type ProductsInCart = {
