@@ -16,13 +16,13 @@ export type Products = Product[];
 //=======================================================================
 
 export type User = {
-  id: number;
+  id: number | null;
   email: string;
   username: string;
   password: string;
 }
 
-export type UserSingUp = {
+export type UserSignUp = {
   email: string;
   username: string;
   password: string;

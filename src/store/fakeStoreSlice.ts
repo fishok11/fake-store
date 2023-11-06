@@ -12,7 +12,7 @@ export type FakeStoreState = {
   category: string;
   fetchCategory: boolean;
   logInPage: boolean;
-  singUpPage: boolean;
+  signUpPage: boolean;
   isLoading: boolean;
 };
 
@@ -23,7 +23,7 @@ const initialState: FakeStoreState = {
   category: '',
   fetchCategory: false,
   logInPage: false,
-  singUpPage: false,
+  signUpPage: false,
   isLoading: false,
 };
 
@@ -101,11 +101,11 @@ export const fakeStoreSlice = createSlice({
     hideLogInPage: (state) => {
       state.logInPage = false;
     },
-    showSingUpPage: (state) => {
-      state.singUpPage = true;
+    showSignUpPage: (state) => {
+      state.signUpPage = true;
     },
-    hideSingUpPage: (state) => {
-      state.singUpPage = false;
+    hideSignUpPage: (state) => {
+      state.signUpPage = false;
     },
   },
   extraReducers: (builder) => {
@@ -141,7 +141,7 @@ export const fakeStoreSlice = createSlice({
   },
 });
 
-export const { filterCategory, clearFilter, showLogInPage, hideLogInPage, showSingUpPage, hideSingUpPage } = fakeStoreSlice.actions;
+export const { filterCategory, clearFilter, showLogInPage, hideLogInPage, showSignUpPage, hideSignUpPage } = fakeStoreSlice.actions;
 
 export const fakeStoreState = (state: RootState) => state.fakeStore;
 

@@ -1,17 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import axios from 'axios';
-import { User, UserLogIn } from './types';
-import toast from 'react-hot-toast';
 import { DEFAULT_URL } from '../utils';
+import { User, UserLogIn, UserSignUp } from './types';
+import toast from 'react-hot-toast';
 
 export type UserState = {
-  token: string;
   isLoading: boolean;
 };
 
 const initialState: UserState = {
-  token: '',
   isLoading: false,
 };
 
@@ -33,6 +31,21 @@ export const logIn = createAsyncThunk<string, UserLogIn, {rejectValue: string}>(
   }
 );
 
+export const signUp = createAsyncThunk<User, UserSignUp, {rejectValue: string}>(
+  'fakeStore/signUp',
+  async (user: UserSignUp, {rejectWithValue}) => {
+    try {
+      const { data } = await axios.post<User>(DEFAULT_URL + 'users', {...user});
+      toast.success('Success!');
+      return data;
+    } catch (error) {
+      console.log(error);
+      toast.error('Error!');
+      return rejectWithValue('Server error!');
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -44,8 +57,13 @@ export const userSlice = createSlice({
     .addCase(logIn.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(logIn.fulfilled, (state, action) => {
-      state.token = action.payload;
+    .addCase(logIn.fulfilled, (state) => {
+      state.isLoading = false;
+    })
+    .addCase(signUp.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(signUp.fulfilled, (state, action) => {
       state.isLoading = false;
     })
   },

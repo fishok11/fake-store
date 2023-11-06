@@ -1,36 +1,39 @@
-import { useState, useMemo } from 'react';
+import { FC } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useCookies } from 'react-cookie';
-import { User, UserLogIn } from '../../store/types';
-import { hideLogInPage, hideSingUpPage } from '../../store/fakeStoreSlice';
-import { logIn, userState } from '../../store/userSlice';
+import { UserSignUp } from '../../store/types';
+import { hideSignUpPage } from '../../store/fakeStoreSlice';
+import { signUp, userState } from '../../store/userSlice';
 import styles from './SingUp.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const SingUp = () => {
+const SignUp: FC = () => {
   const dispatch = useAppDispatch();
   const stateUser = useAppSelector(userState);
-  const [user, setUser] = useState();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [cookies, setCookie] = useCookies(['user']);
   const cookiesLifetime = useMemo(() =>  new Date('3000-12-17T03:24:00'), []);
-  const userl = {
+  const user: UserSignUp = {
     email: email,
     username: username,
     password: password,
   }
 
-  const handleChange = (user: UserLogIn | undefined) => {
-    if (username !== '' && password !== '' && user !== undefined) {
+  const handleChange = async (user: UserSignUp | undefined) => {
+    if (email !== '' && username !== '' && password !== '' && user !== undefined) {
       setError(false);
-      dispatch(logIn(user));
-      dispatch(hideLogInPage());
-      if (stateUser.token === '') {
-        setCookie('user', user, { expires: cookiesLifetime })
+      const resultAction = await dispatch(signUp(user));
+      const userData = resultAction.payload;
+      if (resultAction.type === 'fakeStore/signUp/fulfilled') {
+        dispatch(hideSignUpPage());
+        if (cookies.user === undefined) {
+          setCookie('user', userData, { expires: cookiesLifetime })
+        }
       }
     } else {
       setError(true);
@@ -40,16 +43,16 @@ const SingUp = () => {
   return (
     <div className={styles.container}>
       <div className={styles.item}>
-        <div className={styles.close} onClick={() => dispatch(hideSingUpPage())}><FontAwesomeIcon icon={faXmark} /></div>
+        <div className={styles.close} onClick={() => dispatch(hideSignUpPage())}><FontAwesomeIcon icon={faXmark} /></div>
         <p className={styles.title}>Sing up</p>
         <input type="text" placeholder='Email' className={styles.input} value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="text" placeholder='Username' className={styles.input} value={username} onChange={(e) => setUsername(e.target.value)} />
         <input type="password" placeholder='Password' className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button className={styles.button} onClick={() => handleChange(userl)}>OK</button>
+        <button className={styles.button} onClick={() => handleChange(user)}>OK</button>
         {error && (<p className={styles.error}>Fill in all the fields!</p>)}
       </div>
     </div>
   )
 }
 
-export default SingUp;
+export default SignUp;

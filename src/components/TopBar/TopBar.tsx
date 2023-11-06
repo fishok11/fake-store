@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styles from './TopBar.module.scss'
-import { showLogInPage, showSingUpPage } from '../../store/fakeStoreSlice';
+import { showLogInPage, showSignUpPage } from '../../store/fakeStoreSlice';
 import { useAppDispatch } from '../../store/hooks';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
@@ -22,11 +22,11 @@ const TopBar: FC = () => {
         <div className={styles.actionContainer}>
           {cookies.user !== undefined && (
             <>
-              <button className={styles.ico}><FontAwesomeIcon icon={faUser} /></button>
+              <Link className={styles.ico} to={`/cart`}><FontAwesomeIcon icon={faUser} /></Link>
               <Link className={styles.ico} to={`/cart`}><FontAwesomeIcon icon={faCartShopping} /></Link>
             </>
           )}
-          {cookies.user === undefined && (<button className={styles.ico} onClick={() => (dispatch(showSingUpPage()))}><FontAwesomeIcon icon={faUserPlus} /></button>)}
+          {cookies.user === undefined && (<button className={styles.ico} onClick={() => (dispatch(showSignUpPage()))}><FontAwesomeIcon icon={faUserPlus} /></button>)}
           {cookies.user === undefined && (<button className={styles.ico} onClick={() => (dispatch(showLogInPage()))}><FontAwesomeIcon icon={faArrowRightToBracket} /></button>)}
         </div>
       </div>
