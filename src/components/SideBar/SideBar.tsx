@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { clearFilter, fakeStoreState, filterCategory, getAllCategoriesNames } from '../../store/fakeStoreSlice';
 import styles from './SideBar.module.scss'
+import { cap } from '../../utils';
 
 const SideBar = () => {
   const stateStore = useAppSelector(fakeStoreState);
@@ -9,17 +10,6 @@ const SideBar = () => {
   const handleChange = (category: string) => {
     dispatch(filterCategory(category));
   };
-  const cap = (str: string) => {
-    if (str === '') return str;
-
-    return str
-      .split(' ')
-      .map(word => 
-        word.charAt(0).toUpperCase() 
-        + word.slice(1).toLowerCase()
-      )
-      .join(' ')
-  }
 
   useEffect(() => {
     dispatch(getAllCategoriesNames());

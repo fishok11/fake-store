@@ -10,6 +10,7 @@ import TopBar from './components/TopBar/TopBar';
 import LogIn from './components/LogIn/LogIn';
 import Cart from './components/Cart/Cart';
 import { userState } from './store/userSlice';
+import SingUp from './components/SingUp/SingUp';
 
 const App: FC = () => {
   const stateStore = useAppSelector(fakeStoreState);
@@ -17,6 +18,7 @@ const App: FC = () => {
   return (
     <div>
       {stateStore.logInPage === true && (<LogIn />)}
+      {stateStore.singUpPage === true && (<SingUp />)}
       <TopBar />
       <Routes>
         <Route index element={<MainPage />}/>

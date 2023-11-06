@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import axios from 'axios';
-import { User } from './types';
+import { User, UserLogIn } from './types';
 import toast from 'react-hot-toast';
+import { DEFAULT_URL } from '../utils';
 
 export type UserState = {
   token: string;
@@ -14,11 +15,11 @@ const initialState: UserState = {
   isLoading: false,
 };
 
-export const logIn = createAsyncThunk<string, User, {rejectValue: string}>(
+export const logIn = createAsyncThunk<string, UserLogIn, {rejectValue: string}>(
   'fakeStore/logIn',
-  async (user: User, {rejectWithValue}) => {
+  async (user: UserLogIn, {rejectWithValue}) => {
     try {
-      const { data } = await axios.post('https://fakestoreapi.com/auth/login', {
+      const { data } = await axios.post(DEFAULT_URL + 'users', {
         username: user.username,
         password: user.password,
       });

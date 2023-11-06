@@ -13,27 +13,27 @@ export type Product = {
 
 export type Products = Product[];
 
+//=======================================================================
+
 export type User = {
   id: number;
   email: string;
   username: string;
   password: string;
-  name: {
-    firstname: string;
-    lastname: string;
-  };
-  address: {
-    city: string;
-    street: string;
-    number: number | null;
-    zipcode: string;
-    geolocation: {
-      lat: string;
-      long: string;
-    };
-  };
-  phone: string;
 }
+
+export type UserSingUp = {
+  email: string;
+  username: string;
+  password: string;
+}
+
+export type UserLogIn = {
+  username: string;
+  password: string;
+}
+
+//=======================================================================
 
 export type ProductsInCart = {
   productId: number;
@@ -54,3 +54,5 @@ export type CartItem = {
 }; 
 
 export type Cart = CartItem[];
+
+//=======================================================================

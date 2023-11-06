@@ -3,6 +3,7 @@ import { RootState } from './store';
 import axios from 'axios';
 import { Product, Products } from './types';
 import toast from 'react-hot-toast';
+import { DEFAULT_URL } from '../utils'
 
 export type FakeStoreState = {
   products: Products;
@@ -11,6 +12,7 @@ export type FakeStoreState = {
   category: string;
   fetchCategory: boolean;
   logInPage: boolean;
+  singUpPage: boolean;
   isLoading: boolean;
 };
 
@@ -21,6 +23,7 @@ const initialState: FakeStoreState = {
   category: '',
   fetchCategory: false,
   logInPage: false,
+  singUpPage: false,
   isLoading: false,
 };
 
@@ -28,7 +31,7 @@ export const getAllProducts = createAsyncThunk<Products, undefined, {rejectValue
   'fakeStore/getAllProducts',
   async (_, {rejectWithValue}) => {
     try {
-      const { data } = await axios.get('https://fakestoreapi.com/products');
+      const { data } = await axios.get(DEFAULT_URL + 'products');
       return data;
     } catch (error) {
       console.log(error);
@@ -42,7 +45,7 @@ export const getProduct = createAsyncThunk<Product, string | undefined, {rejectV
   'fakeStore/getProduct',
   async (productId: string | undefined, {rejectWithValue}) => {
     try {
-      const { data } = await axios.get(`https://fakestoreapi.com/products/${productId}`);
+      const { data } = await axios.get(DEFAULT_URL + `products/${productId}`);
       return data;
     } catch (error) {
       console.log(error);
@@ -56,7 +59,7 @@ export const getSpecificCategory = createAsyncThunk<Products, string, {rejectVal
   'store/getSpecificCategory',
   async (category: string, {rejectWithValue}) => {
     try {
-      const { data } = await axios.get(`https://fakestoreapi.com/products/category/${category}`);
+      const { data } = await axios.get(DEFAULT_URL + `${category}`);
       return data;
     } catch (error) {
       console.log(error);
@@ -70,7 +73,7 @@ export const getAllCategoriesNames = createAsyncThunk<string[], undefined, {reje
   'fakeStore/getAllCategoriesNames',
   async (_, {rejectWithValue}) => {
     try {
-      const { data } = await axios.get('https://fakestoreapi.com/products/categories',);
+      const { data } = await axios.get(DEFAULT_URL + 'categories',);
       return data;
     } catch (error) {
       console.log(error);
@@ -97,6 +100,12 @@ export const fakeStoreSlice = createSlice({
     },
     hideLogInPage: (state) => {
       state.logInPage = false;
+    },
+    showSingUpPage: (state) => {
+      state.singUpPage = true;
+    },
+    hideSingUpPage: (state) => {
+      state.singUpPage = false;
     },
   },
   extraReducers: (builder) => {
@@ -132,7 +141,7 @@ export const fakeStoreSlice = createSlice({
   },
 });
 
-export const { filterCategory, clearFilter, showLogInPage, hideLogInPage } = fakeStoreSlice.actions;
+export const { filterCategory, clearFilter, showLogInPage, hideLogInPage, showSingUpPage, hideSingUpPage } = fakeStoreSlice.actions;
 
 export const fakeStoreState = (state: RootState) => state.fakeStore;
 
