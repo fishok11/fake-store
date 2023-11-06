@@ -9,14 +9,14 @@
     @apply flex justify-between max-w-7xl mx-auto;
 
     .serch {
-      @apply flex;
+      @apply flex shadow-serch rounded-xl;
 
       .input {
-        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-xl outline-none block w-full p-1.5 box-border;
+        @apply text-gray-900 text-sm rounded-l-xl outline-none block w-full p-1.5 box-border;
       }
   
       .button {
-        @apply block bg-slate-400 hover:bg-slate-300 duration-300 font-medium rounded-r-xl text-base px-5 py-1.5 text-center box-border;
+        @apply block bg-white hover:bg-slate-100 duration-500 font-medium rounded-r-xl text-base text-gray-600 px-5 py-1.5 text-center box-border;
       }
     }
 

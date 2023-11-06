@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import { UserSignUp } from '../../store/types';
 import { hideSignUpPage } from '../../store/fakeStoreSlice';
 import { signUp } from '../../store/userSlice';
-import styles from './SingUp.module.scss';
+import styles from './LogIn.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -44,9 +44,9 @@ const SignUp: FC = () => {
       <div className={styles.item}>
         <div className={styles.close} onClick={() => dispatch(hideSignUpPage())}><FontAwesomeIcon icon={faXmark} /></div>
         <p className={styles.title}>Sing up</p>
-        <input type="text" placeholder='Email' className={styles.input} value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="text" placeholder='Username' className={styles.input} value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="password" placeholder='Password' className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="text" placeholder='Email' name='email' className={styles.input} value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input type="text" placeholder='Username' name='username' className={styles.input} value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="password" placeholder='Password' name='password' className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} />
         <button className={styles.button} onClick={() => handleChange(user)}>OK</button>
         {error && (<p className={styles.error}>Fill in all the fields!</p>)}
       </div>
