@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useCookies } from 'react-cookie';
 import { hideLogInPage } from '../../store/fakeStoreSlice';
 import { usersForLogIn, userState } from '../../store/userSlice';
-import styles from './LogIn.module.scss';
+import styles from './LoginAndRegistration.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';

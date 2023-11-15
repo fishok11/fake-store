@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import { UserSignUp } from '../../store/types';
 import { hideSignUpPage } from '../../store/fakeStoreSlice';
 import { signUp } from '../../store/userSlice';
-import styles from './LogIn.module.scss';
+import styles from './LoginAndRegistration.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 

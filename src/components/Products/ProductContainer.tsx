@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { fakeStoreState, getAllProducts, getSpecificCategory } from '../../store/fakeStoreSlice';
+import { fakeStoreState, getProducts } from '../../store/fakeStoreSlice';
 import { Product } from '../../store/types';
 import ProductCard from './ProductCard';
 import styles from './ProductContainer.module.scss'
@@ -11,11 +11,7 @@ const ProductContainer: FC = () => {
   const dispatch = useAppDispatch();
   
   useEffect(() => {
-    if (stateStore.category !== '') {
-      dispatch(getSpecificCategory(stateStore.category));
-    } else {
-      dispatch(getAllProducts());
-    }
+    dispatch(getProducts());
   }, [stateStore.fetchCategory, stateStore.category, dispatch]);
 
   return (

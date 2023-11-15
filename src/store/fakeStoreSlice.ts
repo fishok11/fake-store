@@ -27,11 +27,16 @@ const initialState: FakeStoreState = {
   isLoading: false,
 };
 
-export const getAllProducts = createAsyncThunk<Products, undefined, {rejectValue: string}>(
-  'fakeStore/getAllProducts',
-  async (_, {rejectWithValue}) => {
+export const getProducts = createAsyncThunk<Products, string | undefined, {rejectValue: string}>(
+  'fakeStore/getProducts',
+  async (category: string | undefined, {rejectWithValue}) => {
     try {
       const { data } = await axios.get(DEFAULT_URL + 'products');
+
+      if (category) {
+        return data.filter((product: Product) => product.category === category)
+      }
+
       return data;
     } catch (error) {
       console.log(error);
@@ -55,22 +60,8 @@ export const getProduct = createAsyncThunk<Product, string | undefined, {rejectV
   }
 );
 
-export const getSpecificCategory = createAsyncThunk<Products, string, {rejectValue: string}>(
-  'store/getSpecificCategory',
-  async (category: string, {rejectWithValue}) => {
-    try {
-      const { data } = await axios.get(DEFAULT_URL + `${category}`);
-      return data;
-    } catch (error) {
-      console.log(error);
-      toast.error('Error!');
-      return rejectWithValue('Server error!');
-    }
-  }
-);
-
-export const getAllCategoriesNames = createAsyncThunk<string[], undefined, {rejectValue: string}>(
-  'fakeStore/getAllCategoriesNames',
+export const getCategoriesNames = createAsyncThunk<string[], undefined, {rejectValue: string}>(
+  'fakeStore/getCategoriesNames',
   async (_, {rejectWithValue}) => {
     try {
       const { data } = await axios.get(DEFAULT_URL + 'categories',);
@@ -87,14 +78,6 @@ export const fakeStoreSlice = createSlice({
   name: 'fakeStore',
   initialState,
   reducers: {
-    filterCategory: (state, action: PayloadAction<string>) => {
-      state.category = action.payload;
-      state.fetchCategory = !state.fetchCategory;
-    },
-    clearFilter: (state) => {
-      state.category = '';
-      state.fetchCategory = !state.fetchCategory;  
-    },
     showLogInPage: (state) => {
       state.logInPage = true;
     },
@@ -110,38 +93,31 @@ export const fakeStoreSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllProducts.pending, (state) => {
+      .addCase(getProducts.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAllProducts.fulfilled, (state, action) => {
+      .addCase(getProducts.fulfilled, (state, action: PayloadAction<Products>) => {
         state.products = action.payload;
         state.isLoading = false;
       })
       .addCase(getProduct.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getProduct.fulfilled, (state, action) => {
+      .addCase(getProduct.fulfilled, (state, action: PayloadAction<Product>) => {
         state.product = action.payload;
         state.isLoading = false;
       })
-      .addCase(getAllCategoriesNames.pending, (state) => {
+      .addCase(getCategoriesNames.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAllCategoriesNames.fulfilled, (state, action) => {
+      .addCase(getCategoriesNames.fulfilled, (state, action: PayloadAction<string[]>) => {
         state.categories = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(getSpecificCategory.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getSpecificCategory.fulfilled, (state, action) => {
-        state.products = action.payload;
         state.isLoading = false;
       })
   },
 });
 
-export const { filterCategory, clearFilter, showLogInPage, hideLogInPage, showSignUpPage, hideSignUpPage } = fakeStoreSlice.actions;
+export const { showLogInPage, hideLogInPage, showSignUpPage, hideSignUpPage } = fakeStoreSlice.actions;
 
 export const fakeStoreState = (state: RootState) => state.fakeStore;
 
