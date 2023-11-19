@@ -14,7 +14,6 @@ const ProductCard: FC<ProductCardProps> = ({id, image, title, price}) => {
   const date = new Date()
   const cartItem: CartItemToAdded = {
     userId: cookies.user?.id,
-    date: date,
     products: [{productId: id, quantity: 1}]
   }
 

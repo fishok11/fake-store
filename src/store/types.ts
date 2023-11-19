@@ -30,22 +30,20 @@ export type UserSignUp = {
 
 //=======================================================================
 
-export type ProductsInCart = {
+export type ProductInCart = {
   productId: number;
   quantity: number;
 }
 
 export type CartItemToAdded = {
   userId: number;
-  date: Date;
-  products: ProductsInCart[];
+  products: ProductInCart[];
 };
 
 export type CartItem = {
   id: number;
   userId: number;
-  date: Date;
-  products: ProductsInCart[];
+  products: ProductInCart[];
 }; 
 
 export type Cart = CartItem[];

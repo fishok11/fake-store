@@ -33,7 +33,6 @@ const ProductPage: FC = () => {
   
   const cartItem: CartItemToAdded = {
     userId: cookies.user?.id,
-    date: date,
     products: [{productId: +productId, quantity: count}],
   }
 

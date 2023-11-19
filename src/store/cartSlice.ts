@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CartItem, CartItemToAdded,  } from './types';
 import toast from 'react-hot-toast';
 import { showLogInPage } from './fakeStoreSlice';
+import { DEFAULT_URL } from '../utils';
 
 
 export type CartState = {
@@ -21,8 +22,8 @@ export const addProductToCart = createAsyncThunk<CartItem, CartItemToAdded, {rej
   async (cartItem: CartItemToAdded, {rejectWithValue, dispatch}) => {
     if (cartItem.userId !== undefined) {
       try {
-        const { data } = await axios.post('https://fakestoreapi.com/carts', cartItem);
-        toast.success('Product edded to cart!');
+        const { data } = await axios.post(DEFAULT_URL + 'cart', cartItem);
+        toast.success('Product added to cart!');
         return data;
       } catch (error) {
         console.log(error);
