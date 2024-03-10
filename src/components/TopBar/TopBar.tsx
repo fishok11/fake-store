@@ -14,11 +14,11 @@ const TopBar: FC = () => {
   return (
     <header className={styles.container}>
       <div className={styles.items}>
+        <Link to={'/'} className={styles.logo}><FontAwesomeIcon icon={faStore} /> Fake</Link>
         <div className={styles.serch}>
           <input className={styles.input} placeholder={'Serch...'} name='serch'/>
           <button className={styles.button}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
         </div>
-        <Link to={'/'} className={styles.logo}><FontAwesomeIcon icon={faStore} /> Fake</Link>
         <div className={styles.actionContainer}>
           {cookies.user !== undefined && (
             <>
